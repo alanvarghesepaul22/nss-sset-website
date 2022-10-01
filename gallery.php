@@ -15,6 +15,8 @@
     include('common/nss_navbar.php');
     ?>
 
+
+    <h1>Trial Gallery Page</h1>
     <!-- footer -->
     <?php
     include('common/nss_footer.php');
