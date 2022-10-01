@@ -1,0 +1,78 @@
+:root {
+  --container-redir-bg: whitesmoke;
+  --content-redir-bg: white;
+  --bt-icon-color: black;
+}
+
+.dark-theme {
+  transition: all 0.3s;
+  --container-redir-bg: rgb(35, 36, 53);
+  --content-redir-bg: #292a40;
+  --bt-icon-color: white;
+}
+
+.modal-confirm {
+  width: 400px;
+}
+
+.modal-confirm .modal-content {
+  border-radius: 7px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 25px;
+  margin-left: 40px;
+}
+
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.modal-confirm .close {
+  position: absolute;
+  top: -5px;
+  right: -1px;
+  border: none;
+  margin-right: 10px;
+  margin-top: 5px;
+  background-color: var(--content-redir-bg);
+  color: var(--bt-icon-color);
+  font-size: 25px;
+}
+
+.modal-confirm .modal-footer {
+  border: none;
+  font-size: 13px;
+  background-color: var(--content-redir-bg);
+}
+
+.modal-confirm .btn,
+.modal-confirm .btn:active {
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 9px;
+  padding-left: 9px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.modal-confirm .btn-secondary {
+  background: #c1c1c1;
+}
+
+.modal-confirm .btn-secondary:hover,
+.modal-confirm .btn-secondary:focus {
+  background: #a8a8a8;
+}
+
+.modal-confirm .btn-danger {
+  background: #f15e5e;
+  color: white;
+}
+
+.modal-confirm .btn-danger:hover,
+.modal-confirm .btn-danger:focus {
+  background: #ee3535;
+}

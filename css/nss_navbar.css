@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #1c1d25;
+  --nav-element: rgb(35, 36, 53);
+  --nav-element-hover: #1264e3;
+  --navbar-shadow: rgb(206, 207, 207);
+  --ham-menu-body-color: #c6e1f5;
+  --leftside-text-cform: #49494e;
+  --leftside-topic-cform: #000000;
+  --rightside-topic-subtext-cform: #000000;
+  --textfield-bg-cform: rgb(230, 229, 229);
+  --ham-menu-button: rgb(18, 32, 48);
+  --black-text: black;
+  --white-text: white;
+  --text-grayToWhite: #5d5d5d;
+}
+
+.dark-theme {
+  transition: all 0.3s;
+  --primary-color: rgb(21, 32, 43);
+  --secondary-color: hsl(0, 0%, 100%);
+  --nav-element: rgb(255, 255, 255);
+  --nav-element-hover: #1264e3;
+  --navbar-shadow: #1d1c1c;
+  --ham-menu-body-color: #04243d;
+  --leftside-text-cform: #ffffff;
+  --leftside-topic-cform: #1264e3;
+  --rightside-topic-subtext-cform: #ffffff;
+  --textfield-bg-cform: rgb(16, 24, 32);
+  --ham-menu-button: rgb(184, 201, 218);
+  --black-text: white;
+  --white-text: black;
+  --text-grayToWhite: #3582f5;
+}
+
+body {
+  font-family: montserrat;
+  background: var(--primary-color);
+}
+
+header {
+  /* position: sticky; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.6s;
+  padding: 0px 0px;
+  z-index: 10000000;
+}
+
+header.sticky {
+  padding: 0px 0px;
+}
+nav {
+  background: rgb(173, 191, 241);
+  height: 80px;
+  width: 100%;
+}
+
+#icon {
+  display: inline-flex;
+  position: relative;
+  width: 25px;
+  height: fit-content;
+  cursor: pointer;
+  float: right;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+#icon:hover {
+  width: 28px;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+
+/* nss website special css */
+
+.img-nss {
+  width: 60px;
+  margin-left: 15px;
+  margin-top: 7px;
+}
+
+.img-sset {
+  width: 64px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.logo-a-tag {
+  text-decoration: none;
+}
+
+.logo-a-tag:hover {
+  background-color: whitesmoke;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.top-nss {
+  display: flex;
+  font-weight: 600;
+}
+
+.bottom-sset {
+  display: flex;
+  font-weight: 600;
+  line-height: 0.8cm;
+}
+
+.main-head-title {
+  display: inline-flex;
+}
+hr {
+  border-width: 1px;
+  border-color: rgb(150, 150, 150);
+}
+
+/* ul panel */
+.navPanel {
+  position: sticky;
+  top: 0px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  background-color: rgb(13, 9, 51);
+  transition: 1.5s;
+  padding: 0px 0px;
+  z-index: 10000000;
+  box-shadow: 1px 1px 5px rgb(13, 9, 51);
+}
+
+/* .navPanel.sticky {
+  padding: 0px 0px;
+} */
+.navPanel-ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-flow: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.navPanel-li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: fit-content;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.navPanel-li a {
+  color: #ffffff;
+  height: auto;
+  width: 100%;
+  font-size: 17px;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.navPanel a:hover {
+  color: #f8c881;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.6px);
+  -webkit-backdrop-filter: blur(5.6px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.nav-link[aria-current="page"] {
+  color: #ffffff;
+  background-color: rgb(240, 59, 59);
+  border-radius: 3px;
+}
+
+@media (max-width: 560px) {
+  #icon {
+    margin-right: 30px;
+  }
+
+  .img-nss {
+    width: 50px;
+    margin-left: 15px;
+    margin-top: 7px;
+  }
+
+  .img-sset {
+    width: 54px;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  .top-nss {
+    width: fit-content;
+    height: 20px;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .bottom-sset {
+    width: fit-content;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 0.8cm;
+  }
+  .navPanel-li a {
+    height: auto;
+    width: 100%;
+    font-size: 15px;
+    padding: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+}
+
+@media (max-width: 858px) {
+  #icon {
+    margin-right: 30px;
+  }
+}

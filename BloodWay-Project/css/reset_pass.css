@@ -1,0 +1,38 @@
+:root {
+  --container-body-bg: whitesmoke;
+  --input-field-bg: white;
+  --bg-text-color: black;
+  --input-text-color: white;
+}
+
+.dark-theme {
+  transition: all 0.3s;
+  --container-body-bg: rgb(35, 36, 53);
+  --input-field-bg: #201f2c;
+  --bg-text-color: white;
+  --input-text-color: black;
+}
+
+body {
+  background: var(--container-body-bg);
+  color: var(--bg-text-color);
+}
+
+.panel-body {
+  background-color: var(--input-field-bg);
+}
+
+.form-gap {
+  padding-top: 70px;
+}
+
+.form-group {
+  margin-top: 30px;
+}
+
+.alert {
+  height: 30px;
+  display: none;
+  margin-bottom: 10px;
+  padding: 0.2rem 1rem;
+}

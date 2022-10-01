@@ -1,0 +1,31 @@
+:root {
+  --cardInfoContainer-bg: whitesmoke;
+  --accorditem-bg: white;
+  --text-color: black;
+}
+
+.dark-theme {
+  transition: all 0.3s;
+  --cardInfoContainer-bg: rgb(35, 36, 53);
+  --accorditem-bg: #292a40;
+  --text-color: white;
+}
+
+.faqContainer {
+  max-width: 95%;
+  border-radius: 2px;
+}
+
+.accordion{
+    border-radius: 2px;
+}
+
+.heading-accordion {
+  color: var(--text-color);
+}
+
+.accordion-item,
+.accordion-button {
+  background-color: var(--cardInfoContainer-bg);
+  color: var(--text-color);
+}
