@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
-    <link rel="stylesheet" href="css/nss_navbar.css" />
 </head>
 
 <body>
@@ -16,7 +15,12 @@
     ?>
 
 
-    <h1>Trial Gallery Page</h1>
+    <!-- Gallery -->
+    <?php
+    include('common/gallery_body.php');
+    ?>
+
+
     <!-- footer -->
     <?php
     include('common/nss_footer.php');

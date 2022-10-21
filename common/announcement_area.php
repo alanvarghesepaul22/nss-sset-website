@@ -5,8 +5,6 @@ $select_query = "Select * from latest_news";
 $result = mysqli_query($con, $select_query);
 $rows_count = mysqli_num_rows($result);
 ?>
-
-
 <style>
     * {
         padding: 0;

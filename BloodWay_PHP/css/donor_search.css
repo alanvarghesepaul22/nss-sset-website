@@ -1,5 +1,11 @@
 :root {
-  --container-body-bg: whitesmoke;
+  --container-body-bg: rgba(197, 222, 231, 1);
+  --body-bg-gradient:linear-gradient(
+    to right,
+    rgba(197, 222, 231, 1) 11%,
+    rgba(178, 210, 222, 1) 34%,
+    rgba(125, 174, 197, 1) 100%
+  );
   --input-field-bg: white;
   --bg-text-color: black;
   --input-text-color: white;
@@ -11,6 +17,12 @@
 .dark-theme {
   transition: all 0.3s;
   --container-body-bg: rgb(35, 36, 53);
+  --body-bg-gradient:linear-gradient(
+    to right,
+    rgb(33, 35, 53) 11%,
+    rgb(35, 35, 53) 34%,
+    rgb(30, 31, 49) 100%
+  );
   --input-field-bg: #201f2c;
   --bg-text-color: white;
   --input-text-color: black;
@@ -18,9 +30,12 @@
   --table-bg: #201f2c;
   --table-text: white;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 body {
-  background-color: var(--container-body-bg);
+  background: var(--container-body-bg);
+  background: var(--body-bg-gradient);
   color: var(--bg-text-color);
 }
 
@@ -39,7 +54,6 @@ body {
 
 .filter-btn {
   display: flex;
-
   justify-content: center;
 }
 
@@ -52,12 +66,6 @@ body {
   border: none;
 }
 
-.table td,
-.table th {
-  background-color: var(--table-bg);
-  color: var(--table-text);
-}
-
 .notavail-btn {
   width: auto;
   font-size: 13px;
@@ -65,12 +73,12 @@ body {
 
 .avail-btn {
   width: auto;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .view-btn {
   width: auto;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .filt-btn:focus {
@@ -100,4 +108,118 @@ body {
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 30px;
+}
+
+.searchbar {
+  margin-bottom: 40px;
+}
+.tr {
+  display: flex;
+  height: auto;
+  width: auto;
+  margin-left: 50px;
+  margin-right: 50px;
+  /* margin-top: 18px; */
+  margin-bottom: 4px;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.tr:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.top-block {
+  display: flex;
+  width: 100%;
+}
+
+.bott-block {
+  display: flex;
+  width: 100%;
+}
+
+.tr-el {
+  height: auto;
+  width: 100%;
+  margin: 3px;
+  text-align: center;
+}
+
+.placehold {
+  color: var(--bg-text-color);
+  padding-top: 5px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.value {
+  color: var(--bg-text-color);
+  font-weight: 500;
+}
+
+.collapser {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 6px;
+  padding-right: 20px;
+}
+.collapser .value {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 730px) {
+  .tr {
+    flex-wrap: wrap;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .tr-el {
+    text-align: left;
+    margin-left: 20px;
+  }
+
+  .si-circle {
+    width: max-content;
+    height: 40px;
+    padding: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    margin-top: 15px;
+    /* From https://css.glass */
+    background: rgba(37, 63, 71, 1);
+    border-radius: 70px;
+  }
+
+  .si-circle .placehold {
+    display: none;
+  }
+
+  .si-circle .value {
+    color: white;
+    padding-right: 2px;
+    margin-top: 0px;
+    padding-bottom: 1px;
+    font-weight: bolder;
+    font-size: 15px;
+  }
+  .collapser {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 6px;
+  }
+  .view-email{
+    margin-left: 10px;
+  }
 }

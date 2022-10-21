@@ -13,7 +13,19 @@ include('./includes/connect.php');
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/style_signup.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    :root {
+      --ripple-color: #ffffff;
+    }
 
+    .dark-theme {
+      --ripple-color: rgb(21, 32, 43);
+    }
+
+    body {
+      background-color: var(--ripple-color);
+    }
+  </style>
 </head>
 
 <body>

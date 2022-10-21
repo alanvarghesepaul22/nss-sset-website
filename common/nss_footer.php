@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="./css/nss_footer.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <footer>
@@ -8,7 +8,7 @@
         <div class="footer-top">
             <p class="footer-title">National Service Scheme</p>
             <div class="footer-media-icons">
-                <a href="https://www.facebook.com/scms.sset/" target="_blank"><i class="fab fa-facebook-f"></i></a>                <a href="https://instagram.com/nss_sset?igshid=YmMyMTA2M2Y=" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/scms.sset/" target="_blank"><i class="fab fa-facebook-f"></i></a> <a href="https://instagram.com/nss_sset?igshid=YmMyMTA2M2Y=" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://youtube.com/channel/UCkShro21X_7dH3h44wIk1rA" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>

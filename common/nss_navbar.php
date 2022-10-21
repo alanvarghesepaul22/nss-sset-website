@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="./css/nss_navbar.css" />
+</head>
+
 <header>
     <nav>
         <div class="main-head-title">

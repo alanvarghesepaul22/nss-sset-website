@@ -30,81 +30,91 @@ if (isset($_POST['fetchZone'])) {
         from donor_details 
         where donor_bgrp='$request1'and donor_zone='$request2'and donor_category='$request3'";
         $result = mysqli_query($con, $query);
-        $count = mysqli_num_rows($result);
-
+        $rows_count = mysqli_num_rows($result);
 ?>
-        <table class="table mt-5 table-dark table-hover table-responsive donors-list">
+        <!-- table -->
+        <?php
+        if ($rows_count < 1) { ?>
+            <h4 class="norecord-findon">
+                <center>No records found!</center>
+            </h4>
+        <?php
+        } else { ?>
             <?php
-            if ($count) {
+            $si_no = 1;
+            while ($fetchData = mysqli_fetch_assoc($result)) :
+                $dona_id = $fetchData['donor_id'];
+                $select_query_dondet = "SELECT * from donation_details where dona_id='$dona_id'";
+                $result_dondet = mysqli_query($con, $select_query_dondet);
+                $rows_count_dondet = mysqli_num_rows($result_dondet);
             ?>
-                <thead>
-                    <tr>
-                        <th>SI No.</th>
-                        <th>Name</th>
-                        <th>Blood Group</th>
-                        <th>Distirct/Zone</th>
-                        <th>Status</th>
-                        <th>Contact</th>
-                    </tr>
+                <div class="tr" id="tab">
+                    <div class="top-block">
+                        <div class="tr-el si-el">
+                            <div class="si-circle">
+                                <p class="placehold">SI No</p>
+                                <p class="value"><?php echo $si_no; ?></p>
+                            </div>
 
-                <?php
-            } else {
-                ?>
-                    <h3 class="mt-5">
-                        <center><?php echo "Sorry! No record found."; ?></center>
-                    </h3>
+                        </div>
+                        <div class="tr-el name-el">
+                            <p class="placehold">Full Name</p>
+                            <p class="value"><?php echo $fetchData['donor_name']; ?></p>
+                        </div>
+                        <div class="tr-el bgrp-el">
+                            <p class="placehold">Blood Group</p>
+                            <p class="value"><?php echo $fetchData['donor_bgrp']; ?></p>
+                        </div>
+                    </div>
 
-                <?php
-            }
+                    <div class="bott-block">
+                        <div class="tr-el dist-el">
+                            <p class="placehold">Distirct/Zone</p>
+                            <p class="value"><?php echo $fetchData['donor_zone']; ?></p>
+                        </div>
+                        <div class="tr-el stat-el">
+                            <p class="placehold">Status</p>
+                            <?php
+                            $avail_status = $fetchData['avail_status'];
+                            $remain_days = $fetchData['remDays'];
+                            if ($rows_count_dondet == 0) {
+                                $avail_status = 1;
+                                $remain_days = 0;
+                            }
+                            if ($avail_status == 1) {
+                                echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available</p>";
+                            } else {
+                                echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
+                            }
+                            ?>
+                        </div>
+                        <div class="tr-el contac-el">
+                            <p class="placehold">Contact</p>
+                            <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
+                        </div>
+                    </div>
+                    <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
+                        <div class="tr-el collapser">
+                            <div>
+                                <p class="placehold">Mobile</p>
+                                <p class="value"><?php echo $fetchData['donor_mobNum']; ?></p>
+                            </div>
+                            <div class="view-email">
+                                <p class="placehold">Email</p>
+                                <p class="value"><?php echo $fetchData['donor_email']; ?></p>
+                            </div>
 
-                ?>
-                </thead>
-                <tbody>
-                    <?php
-                    $si_no = 1;
-                    while ($fetchData = mysqli_fetch_assoc($result)) : ?>
-                        <tr>
-                            <th><?php echo $si_no; ?></th>
-                            <td><?php echo $fetchData['donor_name']; ?></td>
-                            <td><?php echo $fetchData['donor_bgrp']; ?></td>
-                            <td><?php echo $fetchData['donor_zone']; ?></td>
-                            <td>
-                                <?php
-                                $avail_status = $fetchData['avail_status'];
-                                $remain_days = $fetchData['remDays'];
-                                if ($avail_status == 1) {
-                                    echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available Now</p>";
-                                } else {
-                                    echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
-                                <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
-                                    <div class="card card-body">
-                                        <strong>Mobile:</strong>
-                                        <p><?php echo $fetchData['donor_mobNum']; ?></p>
-                                        <strong>Email:</strong>
-                                        <p><?php echo $fetchData['donor_email']; ?></p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php $si_no++;
-                    endwhile; ?>
-                </tbody>
-        </table>
+                        </div>
+                    </div>
+                </div>
+
+            <?php $si_no++;
+            endwhile; ?>
+        <?php } ?>
 <?php
     }
 }
 ?>
-
-
-
-
-
-
 
 <!-- For Blood group dropdown -->
 <?php
@@ -112,74 +122,90 @@ if (isset($_POST['request1'])) {
     $request = $_POST['request1'];
     $query = "SELECT * from donor_details where donor_bgrp='$request'";
     $result = mysqli_query($con, $query);
-    $count = mysqli_num_rows($result);
+    $rows_count = mysqli_num_rows($result);
 ?>
-    <table class="table mt-5 table-dark table-hover table-responsive donors-list">
+    <!-- table -->
+    <?php
+    if ($rows_count < 1) { ?>
+        <h4 class="norecord-findon">
+            <center>No records found!</center>
+        </h4>
+    <?php
+    } else { ?>
         <?php
-        if ($count) {
+        $si_no = 1;
+        while ($fetchData = mysqli_fetch_assoc($result)) :
+            $dona_id = $fetchData['donor_id'];
+            $select_query_dondet = "SELECT * from donation_details where dona_id='$dona_id'";
+            $result_dondet = mysqli_query($con, $select_query_dondet);
+            $rows_count_dondet = mysqli_num_rows($result_dondet);
         ?>
-            <thead>
-                <tr>
-                    <th>SI No.</th>
-                    <th>Name</th>
-                    <th>Blood Group</th>
-                    <th>Distirct/Zone</th>
-                    <th>Status</th>
-                    <th>Contact</th>
-                </tr>
+            <div class="tr" id="tab">
+                <div class="top-block">
+                    <div class="tr-el si-el">
+                        <div class="si-circle">
+                            <p class="placehold">SI No</p>
+                            <p class="value"><?php echo $si_no; ?></p>
+                        </div>
 
-            <?php
-        } else {
-            ?>
-                <h3 class="mt-5">
-                    <center><?php echo "Sorry! No record found"; ?></center>
-                </h3>
+                    </div>
+                    <div class="tr-el name-el">
+                        <p class="placehold">Full Name</p>
+                        <p class="value"><?php echo $fetchData['donor_name']; ?></p>
+                    </div>
+                    <div class="tr-el bgrp-el">
+                        <p class="placehold">Blood Group</p>
+                        <p class="value"><?php echo $fetchData['donor_bgrp']; ?></p>
+                    </div>
+                </div>
 
-            <?php
-        }
+                <div class="bott-block">
+                    <div class="tr-el dist-el">
+                        <p class="placehold">Distirct/Zone</p>
+                        <p class="value"><?php echo $fetchData['donor_zone']; ?></p>
+                    </div>
+                    <div class="tr-el stat-el">
+                        <p class="placehold">Status</p>
+                        <?php
+                        $avail_status = $fetchData['avail_status'];
+                        $remain_days = $fetchData['remDays'];
+                        if ($rows_count_dondet == 0) {
+                            $avail_status = 1;
+                            $remain_days = 0;
+                        }
+                        if ($avail_status == 1) {
+                            echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available</p>";
+                        } else {
+                            echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
+                        }
+                        ?>
+                    </div>
+                    <div class="tr-el contac-el">
+                        <p class="placehold">Contact</p>
+                        <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
+                    </div>
+                </div>
+                <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
+                    <div class="tr-el collapser">
+                        <div>
+                            <p class="placehold">Mobile</p>
+                            <p class="value"><?php echo $fetchData['donor_mobNum']; ?></p>
+                        </div>
+                        <div class="view-email">
+                            <p class="placehold">Email</p>
+                            <p class="value"><?php echo $fetchData['donor_email']; ?></p>
+                        </div>
 
-            ?>
-            </thead>
-            <tbody>
-                <?php
-                $si_no = 1;
-                while ($fetchData = mysqli_fetch_assoc($result)) : ?>
-                    <tr>
-                        <th><?php echo $si_no; ?></th>
-                        <td><?php echo $fetchData['donor_name']; ?></td>
-                        <td><?php echo $fetchData['donor_bgrp']; ?></td>
-                        <td><?php echo $fetchData['donor_zone']; ?></td>
-                        <td>
-                            <?php
-                            $avail_status = $fetchData['avail_status'];
-                            $remain_days = $fetchData['remDays'];
-                            if ($avail_status == 1) {
-                                echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available Now</p>";
-                            } else {
-                                echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
-                            <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
-                                <div class="card card-body">
-                                    <strong>Mobile:</strong>
-                                    <p><?php echo $fetchData['donor_mobNum']; ?></p>
-                                    <strong>Email:</strong>
-                                    <p><?php echo $fetchData['donor_email']; ?></p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php $si_no++;
-                endwhile; ?>
-            </tbody>
-    </table>
+                    </div>
+                </div>
+            </div>
+
+        <?php $si_no++;
+        endwhile; ?>
+    <?php } ?>
 <?php
 }
 ?>
-
 
 <!-- For Zone dropdown -->
 <?php
@@ -187,68 +213,88 @@ if (isset($_POST['request2'])) {
     $request = $_POST['request2'];
     $query = "SELECT * from donor_details where donor_zone='$request'";
     $result = mysqli_query($con, $query);
-    $count = mysqli_num_rows($result);
+    $rows_count = mysqli_num_rows($result);
 ?>
-    <table class="table mt-5 table-dark table-hover table-responsive donors-list">
+    <!-- table -->
+    <?php
+    if ($rows_count < 1) { ?>
+        <h4 class="norecord-findon">
+            <center>No records found!</center>
+        </h4>
+    <?php
+    } else { ?>
         <?php
-        if ($count) {
-        ?>
-            <thead>
-                <tr>
-                    <th>SI No.</th>
-                    <th>Name</th>
-                    <th>Blood Group</th>
-                    <th>Distirct/Zone</th>
-                    <th>Status</th>
-                    <th>Contact</th>
-                </tr>
+        $si_no = 1;
+        while ($fetchData = mysqli_fetch_assoc($result)) :
 
-            <?php
-        } else {
-            ?>
-                <h3 class="mt-5">
-                    <center><?php echo "Sorry! No record found"; ?></center>
-                </h3>
-            <?php
-        }
-            ?>
-            </thead>
-            <tbody>
-                <?php
-                $si_no = 1;
-                while ($fetchData = mysqli_fetch_assoc($result)) : ?>
-                    <tr>
-                        <th><?php echo $si_no; ?></th>
-                        <td><?php echo $fetchData['donor_name']; ?></td>
-                        <td><?php echo $fetchData['donor_bgrp']; ?></td>
-                        <td><?php echo $fetchData['donor_zone']; ?></td>
-                        <td>
-                            <?php
-                            $avail_status = $fetchData['avail_status'];
-                            $remain_days = $fetchData['remDays'];
-                            if ($avail_status == 1) {
-                                echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available Now</p>";
-                            } else {
-                                echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
-                            <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
-                                <div class="card card-body">
-                                    <strong>Mobile:</strong>
-                                    <p><?php echo $fetchData['donor_mobNum']; ?></p>
-                                    <strong>Email:</strong>
-                                    <p><?php echo $fetchData['donor_email']; ?></p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php $si_no++;
-                endwhile; ?>
-            </tbody>
-    </table>
+            $dona_id = $fetchData['donor_id'];
+            $select_query_dondet = "SELECT * from donation_details where dona_id='$dona_id'";
+            $result_dondet = mysqli_query($con, $select_query_dondet);
+            $rows_count_dondet = mysqli_num_rows($result_dondet);
+        ?>
+            <div class="tr" id="tab">
+                <div class="top-block">
+                    <div class="tr-el si-el">
+                        <div class="si-circle">
+                            <p class="placehold">SI No</p>
+                            <p class="value"><?php echo $si_no; ?></p>
+                        </div>
+
+                    </div>
+                    <div class="tr-el name-el">
+                        <p class="placehold">Full Name</p>
+                        <p class="value"><?php echo $fetchData['donor_name']; ?></p>
+                    </div>
+                    <div class="tr-el bgrp-el">
+                        <p class="placehold">Blood Group</p>
+                        <p class="value"><?php echo $fetchData['donor_bgrp']; ?></p>
+                    </div>
+                </div>
+
+                <div class="bott-block">
+                    <div class="tr-el dist-el">
+                        <p class="placehold">Distirct/Zone</p>
+                        <p class="value"><?php echo $fetchData['donor_zone']; ?></p>
+                    </div>
+                    <div class="tr-el stat-el">
+                        <p class="placehold">Status</p>
+                        <?php
+                        $avail_status = $fetchData['avail_status'];
+                        $remain_days = $fetchData['remDays'];
+                        if ($rows_count_dondet == 0) {
+                            $avail_status = 1;
+                            $remain_days = 0;
+                        }
+                        if ($avail_status == 1) {
+                            echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available</p>";
+                        } else {
+                            echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
+                        }
+                        ?>
+                    </div>
+                    <div class="tr-el contac-el">
+                        <p class="placehold">Contact</p>
+                        <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
+                    </div>
+                </div>
+                <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
+                    <div class="tr-el collapser">
+                        <div>
+                            <p class="placehold">Mobile</p>
+                            <p class="value"><?php echo $fetchData['donor_mobNum']; ?></p>
+                        </div>
+                        <div class="view-email">
+                            <p class="placehold">Email</p>
+                            <p class="value"><?php echo $fetchData['donor_email']; ?></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        <?php $si_no++;
+        endwhile; ?>
+    <?php } ?>
 <?php
 }
 ?>
@@ -257,71 +303,89 @@ if (isset($_POST['request2'])) {
 <?php
 if (isset($_POST['request3'])) {
     $request = $_POST['request3'];
-
     $query = "SELECT * from donor_details where donor_category='$request'";
     $result = mysqli_query($con, $query);
-    $count = mysqli_num_rows($result);
+    $rows_count = mysqli_num_rows($result);
 ?>
-    <table class="table mt-5 table-dark table-hover table-responsive donors-list">
+    <!-- table -->
+    <?php
+    if ($rows_count < 1) { ?>
+        <h4 class="norecord-findon">
+            <center>No records found!</center>
+        </h4>
+    <?php
+    } else { ?>
         <?php
-        if ($count) {
+        $si_no = 1;
+        while ($fetchData = mysqli_fetch_assoc($result)) :
+            $dona_id = $fetchData['donor_id'];
+            $select_query_dondet = "SELECT * from donation_details where dona_id='$dona_id'";
+            $result_dondet = mysqli_query($con, $select_query_dondet);
+            $rows_count_dondet = mysqli_num_rows($result_dondet);
         ?>
-            <thead>
-                <tr>
-                    <th>SI No.</th>
-                    <th>Name</th>
-                    <th>Blood Group</th>
-                    <th>Distirct/Zone</th>
-                    <th>Status</th>
-                    <th>Contact</th>
-                </tr>
+            <div class="tr" id="tab">
+                <div class="top-block">
+                    <div class="tr-el si-el">
+                        <div class="si-circle">
+                            <p class="placehold">SI No</p>
+                            <p class="value"><?php echo $si_no; ?></p>
+                        </div>
 
-            <?php
-        } else {
-            ?>
-                <h3 class="mt-5">
-                    <center><?php echo "Sorry! No record found"; ?></center>
-                </h3>
-            <?php
-        }
-            ?>
-            </thead>
-            <tbody>
-                <?php
-                $si_no = 1;
-                while ($fetchData = mysqli_fetch_assoc($result)) : ?>
-                    <tr>
-                        <th><?php echo $si_no; ?></th>
-                        <td><?php echo $fetchData['donor_name']; ?></td>
-                        <td><?php echo $fetchData['donor_bgrp']; ?></td>
-                        <td><?php echo $fetchData['donor_zone']; ?></td>
-                        <td>
-                            <?php
-                            $avail_status = $fetchData['avail_status'];
-                            $remain_days = $fetchData['remDays'];
-                            if ($avail_status == 1) {
-                                echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available Now</p>";
-                            } else {
-                                echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
-                            <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
-                                <div class="card card-body">
-                                    <strong>Mobile:</strong>
-                                    <p><?php echo $fetchData['donor_mobNum']; ?></p>
-                                    <strong>Email:</strong>
-                                    <p><?php echo $fetchData['donor_email']; ?></p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php $si_no++;
-                endwhile; ?>
-            </tbody>
-    </table>
+                    </div>
+                    <div class="tr-el name-el">
+                        <p class="placehold">Full Name</p>
+                        <p class="value"><?php echo $fetchData['donor_name']; ?></p>
+                    </div>
+                    <div class="tr-el bgrp-el">
+                        <p class="placehold">Blood Group</p>
+                        <p class="value"><?php echo $fetchData['donor_bgrp']; ?></p>
+                    </div>
+                </div>
+
+                <div class="bott-block">
+                    <div class="tr-el dist-el">
+                        <p class="placehold">Distirct/Zone</p>
+                        <p class="value"><?php echo $fetchData['donor_zone']; ?></p>
+                    </div>
+                    <div class="tr-el stat-el">
+                        <p class="placehold">Status</p>
+                        <?php
+                        $avail_status = $fetchData['avail_status'];
+                        $remain_days = $fetchData['remDays'];
+                        if ($rows_count_dondet == 0) {
+                            $avail_status = 1;
+                            $remain_days = 0;
+                        }
+                        if ($avail_status == 1) {
+                            echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available</p>";
+                        } else {
+                            echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
+                        }
+                        ?>
+                    </div>
+                    <div class="tr-el contac-el">
+                        <p class="placehold">Contact</p>
+                        <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
+                    </div>
+                </div>
+                <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
+                    <div class="tr-el collapser">
+                        <div>
+                            <p class="placehold">Mobile</p>
+                            <p class="value"><?php echo $fetchData['donor_mobNum']; ?></p>
+                        </div>
+                        <div class="view-email">
+                            <p class="placehold">Email</p>
+                            <p class="value"><?php echo $fetchData['donor_email']; ?></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        <?php $si_no++;
+        endwhile; ?>
+    <?php } ?>
 <?php
 }
 ?>

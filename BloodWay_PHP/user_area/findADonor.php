@@ -9,12 +9,11 @@ if (!isset($_SESSION["user_email"])) {
 }
 
 if (isset($_SESSION["user_email"])) {
-  $conf_email = $_SESSION['user_email'];
   $select_query = "SELECT * from donor_details";
   $result = mysqli_query($con, $select_query);
   $rows_count = mysqli_num_rows($result);
 
-  $select_query_donation_details = "SELECT * from donation_details where dona_email='$conf_email'";
+  $select_query_donation_details = "SELECT * from donation_details";
   $result_donation_details = mysqli_query($con, $select_query_donation_details);
   $rows_count_donation_details = mysqli_num_rows($result_donation_details);
 }
@@ -25,6 +24,7 @@ if (isset($_SESSION["user_email"])) {
 <html lang="en" dir="ltr">
 
 <head>
+
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   <meta charset="utf-8" />
   <title>Search for Donor</title>
@@ -103,7 +103,7 @@ if (isset($_SESSION["user_email"])) {
         <center>--------------OR--------------</center>
       </h6>
 
-      <div class="col">
+      <div class="col searchbar">
         <input id="search" type="text" class="form-control" placeholder="Search for Id, Name, Email...." data-tables="donors-list">
       </div>
 
@@ -116,64 +116,76 @@ if (isset($_SESSION["user_email"])) {
     <h4 class="norecord-findon">No records found!</h4>
   <?php
   } else { ?>
-    <div class="container bgclass">
-      <table class="table mt-5  table-responsive donors-list">
-        <thead>
-          <tr>
-            <th>SI No.</th>
-            <th>Name</th>
-            <th>Blood Group</th>
-            <th>Distirct/Zone</th>
-            <th>Status</th>
-            <th>Contact</th>
-          </tr>
-        </thead>
+    <?php
+    $si_no = 1;
+    ?>
+    <div class="bgclass"> 
+    <?php
+    while ($fetchData = mysqli_fetch_assoc($result)) : ?>
+      
+        <div class="tr" id="tab">
+          <div class="top-block">
+            <div class="tr-el si-el">
+              <div class="si-circle">
+                <p class="placehold">SI No</p>
+                <p class="value"><?php echo $si_no; ?></p>
+              </div>
+            </div>
+            <div class="tr-el name-el">
+              <p class="placehold">Full Name</p>
+              <p class="value"><?php echo $fetchData['donor_name']; ?></p>
+            </div>
+            <div class="tr-el bgrp-el">
+              <p class="placehold">Blood Group</p>
+              <p class="value"><?php echo $fetchData['donor_bgrp']; ?></p>
+            </div>
+          </div>
 
-        <tbody id="tab">
-          <?php
-          $si_no = 1;
-          while ($fetchData = mysqli_fetch_assoc($result)) : ?>
-            <tr>
-              <th><?php echo $si_no; ?></th>
-              <td><?php echo $fetchData['donor_name']; ?></td>
-              <td><?php echo $fetchData['donor_bgrp']; ?></td>
-              <td><?php echo $fetchData['donor_zone']; ?></td>
-              <td>
-                <?php
-                $avail_status = $fetchData['avail_status'];
-                $remain_days = $fetchData['remDays'];
-                if ($rows_count_donation_details == 0) {
-                  $avail_status = 1;
-                  $remain_days = 0;
-                }
-                if ($avail_status == 1) {
-                  echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available Now</p>";
-                } else {
-                  echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
-                }
-                ?>
-              </td>
-              <td>
-                <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
-                <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
-                  <div class="card card-body">
-                    <strong>Mobile:</strong>
-                    <p><?php echo $fetchData['donor_mobNum']; ?></p>
-                    <strong>Email:</strong>
-                    <p><?php echo $fetchData['donor_email']; ?></p>
-                  </div>
-                </div>
-              </td>
+          <div class="bott-block">
+            <div class="tr-el dist-el">
+              <p class="placehold">Distirct/Zone</p>
+              <p class="value"><?php echo $fetchData['donor_zone']; ?></p>
+            </div>
+            <div class="tr-el stat-el">
+              <p class="placehold">Status</p>
+              <?php
+              $avail_status = $fetchData['avail_status'];
+              $remain_days = $fetchData['remDays'];
+              if ($rows_count_donation_details == 0) {
+                $avail_status = 1;
+                $remain_days = 0;
+              }
+              if ($avail_status == 1) {
+                echo  "<p class='btn btn-success btn-sm avail-btn'><i class='bi bi-check-circle'></i> Available</p>";
+              } else {
+                echo "<p class='btn btn-warning btn-sm notavail-btn'><i class='bi bi-hourglass-split'></i> in $remain_days days</p>";
+              }
+              ?>
+            </div>
+            <div class="tr-el contac-el">
+              <p class="placehold">Contact</p>
+              <a class="btn btn-primary btn-sm view-btn" data-bs-toggle="collapse" href="#<?php echo $fetchData['view_charid']; ?>" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-eye-fill"></i> View</a>
+            </div>
+          </div>
+          <div class="collapse" id="<?php echo $fetchData['view_charid']; ?>">
+            <div class="tr-el collapser">
+              <div>
+                <p class="placehold">Mobile</p>
+                <p class="value"><?php echo $fetchData['donor_mobNum']; ?></p>
+              </div>
+              <div class="view-email">
+                <p class="placehold">Email</p>
+                <p class="value"><?php echo $fetchData['donor_email']; ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+     
 
-            </tr>
-          <?php $si_no++;
-          endwhile; ?>
-        </tbody>
-
-      </table>
+    <?php $si_no++;
+    endwhile; ?> 
     </div>
   <?php } ?>
-
 
   <!-- footer -->
   <?php
@@ -224,7 +236,7 @@ if (isset($_SESSION["user_email"])) {
   $(document).ready(function() {
     $("#search").on("keyup", function() {
       var value = $(this).val().toLowerCase();
-      $("#tab tr").filter(function() {
+      $("#tab").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });
