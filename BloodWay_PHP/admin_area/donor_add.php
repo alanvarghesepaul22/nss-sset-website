@@ -168,126 +168,91 @@ function getAge($dob)
     ?>
 
     <!-- reg_form -->
-    <div data-bs-spy="scroll" data-bs-target="#scrollcode" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-        <div class="container-reg" id="code">
-            <div class="title">Add Donor</div>
+    <div class="container-reg" id="code">
+        <div class="title">Add Donor</div>
 
-            <div class="content-reg">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                    <div class="user-details-reg">
-                        <div class="input-box-reg">
-                            <span class="details-reg">Full Name</span>
-                            <input type="text" placeholder="Enter your name" name="donor_name" required>
-                        </div>
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">Email</span>
-                            <input type="email" placeholder="Enter your email" name="donor_email" required>
-                        </div>
-
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">Phone Number</span>
-                            <input type="text" placeholder="Enter your number" name="donor_mobnum" required>
-                        </div>
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">Date of Birth</span>
-                            <input type="date" placeholder="Enter your DOB" name="donor_dob" required>
-                        </div>
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">District/Zone</span>
-                            <select name="donor_zone" id="zone-dist" name="donor_zone" required>
-                                <option value="" selected>Select</option>
-                                <option value="Ernakulam">Ernakulam</option>
-                                <option value="Thrissur">Thrissur</option>
-                            </select>
-                        </div>
-                        <div class="input-box-reg">
-                            <span class="details-reg">Blood Group</span>
-                            <select name="donor_bgrp" id="blood-grp" required>
-                                <option value="" selected>Select</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                                <option value="Bombay blood group">Bombay blood group</option>
-                            </select>
-                        </div>
-
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">Gender</span>
-                            <select name="donor_gender" id="zone-dist" name="donor_zone" required>
-                                <option value="" selected>Select</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="input-box-reg">
-                            <span class="details-reg">Category</span>
-                            <select name="donor_category" id="don_cat" required>
-                                <option value="" selected>Select</option>
-                                <option value="Nss Volunteer">Nss Volunteer</option>
-                                <option value="Student">Student</option>
-                                <option value="College Staff">College Staff</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
+        <div class="content-reg">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <div class="user-details-reg">
+                    <div class="input-box-reg">
+                        <span class="details-reg">Full Name</span>
+                        <input type="text" placeholder="Enter your name" name="donor_name" required>
                     </div>
 
-                    <div class="button-reg">
-                        <input type="submit" value="Add Donor" name="donor_reg">
+                    <div class="input-box-reg">
+                        <span class="details-reg">Email</span>
+                        <input type="email" placeholder="Enter your email" name="donor_email" required>
                     </div>
-                </form>
-            </div>
+
+
+                    <div class="input-box-reg">
+                        <span class="details-reg">Phone Number</span>
+                        <input type="text" placeholder="Enter your number" name="donor_mobnum" required>
+                    </div>
+
+                    <div class="input-box-reg">
+                        <span class="details-reg">Date of Birth</span>
+                        <input type="date" placeholder="Enter your DOB" name="donor_dob" required>
+                    </div>
+
+                    <div class="input-box-reg">
+                        <span class="details-reg">District/Zone</span>
+                        <select name="donor_zone" id="zone-dist" name="donor_zone" required>
+                            <option value="" selected>Select</option>
+                            <option value="Ernakulam">Ernakulam</option>
+                            <option value="Thrissur">Thrissur</option>
+                        </select>
+                    </div>
+                    <div class="input-box-reg">
+                        <span class="details-reg">Blood Group</span>
+                        <select name="donor_bgrp" id="blood-grp" required>
+                            <option value="" selected>Select</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="Bombay blood group">Bombay blood group</option>
+                        </select>
+                    </div>
+
+
+                    <div class="input-box-reg">
+                        <span class="details-reg">Gender</span>
+                        <select name="donor_gender" id="zone-dist" name="donor_zone" required>
+                            <option value="" selected>Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box-reg">
+                        <span class="details-reg">Category</span>
+                        <select name="donor_category" id="don_cat" required>
+                            <option value="" selected>Select</option>
+                            <option value="Nss Volunteer">Nss Volunteer</option>
+                            <option value="Student">Student</option>
+                            <option value="College Staff">College Staff</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-reg">
+                    <input type="submit" value="Add Donor" name="donor_reg">
+                </div>
+            </form>
         </div>
     </div>
 
+
 </body>
 
-<!-- dark theme js -->
-<script>
-    var icon = document.getElementById("icon");
-
-    icon.onclick = function() {
-        var SetTheme = document.body;
-
-        SetTheme.classList.toggle("dark-theme");
-
-        var theme;
-
-        if (SetTheme.classList.contains("dark-theme")) {
-            console.log("Dark mode");
-            theme = "DARK";
-        } else {
-            console.log("Light mode");
-            theme = "LIGHT";
-        }
-
-        localStorage.setItem("PageTheme", JSON.stringify(theme));
-
-        if (document.body.classList.contains("dark-theme")) {
-            icon.src = "../images/sun.png";
-        } else {
-            icon.src = "../images/moon.png";
-        }
-    };
-
-    let GetTheme = JSON.parse(localStorage.getItem("PageTheme"));
-    console.log(GetTheme);
-
-    if (GetTheme === "DARK") {
-        document.body.classList = "dark-theme";
-        icon.src = "../images/sun.png";
-    }
-</script>
+<!-- Dark theme -->
+<script src="../js/dark_theme.js"></script>
 
 <script src="js/script.js"></script>

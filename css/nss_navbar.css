@@ -65,7 +65,13 @@ header.sticky {
   padding: 0px 0px;
 }
 nav {
-  background: rgb(173, 191, 241);
+  background: rgb(192, 222, 236);
+  /* background: linear-gradient(
+    to right,
+    rgb(184, 220, 233) 11%,
+    rgb(146, 211, 235) 34%,
+    rgb(145, 211, 241) 100%
+  ); */
   height: 80px;
   width: 100%;
 }
@@ -243,5 +249,34 @@ hr {
 @media (max-width: 858px) {
   #icon {
     margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .img-nss {
+    width: 44px;
+    margin-left: 12px;
+    margin-top: 10px;
+  }
+
+  .img-sset {
+    width: 46px;
+    margin-left: 5px;
+    margin-top: 8px;
+  }
+  .top-nss {
+    width: fit-content;
+    height: 20px;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .bottom-sset {
+    width: fit-content;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 0.8cm;
   }
 }

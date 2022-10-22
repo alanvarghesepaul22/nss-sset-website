@@ -27,8 +27,6 @@
   width: 100%;
   background-color: var(--primary-color);
   padding: 25px 30px;
-  padding-bottom: 16px;
-  padding-top: 8px;
 }
 .container-reg .title {
   font-size: 25px;
@@ -138,8 +136,8 @@ form input[type="radio"] {
 form .button-reg {
   display: flex;
   height: 45px;
-  /* margin: 35px 0; */
-  margin-top: 30px;
+
+  margin: 35px 0;
   justify-content: center;
 }
 form .button-reg input {

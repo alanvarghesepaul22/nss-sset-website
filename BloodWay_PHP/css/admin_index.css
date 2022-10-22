@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 :root {
   --body-bg: white;
   --nav-bg: whitesmoke;
@@ -6,6 +16,15 @@
   --nav-box-shadow: rgba(163, 155, 163, 1);
   --continue-btn-bg: #262626;
   --continue-btn-color: #fbfbfb;
+  --gradient-bg: linear-gradient(
+    to right,
+    rgba(197, 222, 231, 1) 11%,
+    rgb(182, 218, 231) 34%,
+    rgb(154, 209, 236) 100%
+  );
+
+  --form-input: #4e4e4e;
+  --input-placeholder: #4e4e4e;
 }
 
 .dark-theme {
@@ -17,6 +36,13 @@
   --nav-box-shadow: rgb(35, 29, 43);
   --continue-btn-bg: #0f35a0;
   --continue-btn-color: #fbfbfb;
+  --gradient-bg: linear-gradient(
+    to right,
+    rgb(17, 19, 34) 34%,
+    rgb(14, 16, 37) 100%
+  );
+  --form-input: #b3b1b1;
+  --input-placeholder: #0c0c0c;
 }
 
 body {
@@ -110,7 +136,7 @@ nav {
   color: var(--continue-btn-color);
 }
 .nav-tabs .nav-link {
-  background:0 0;
+  background: 0 0;
   color: var(--nav-text-color);
 }
 .nav-tabs .nav-link.active {
@@ -130,7 +156,7 @@ nav {
   margin: auto;
 }
 
-.count-card-body{
+.count-card-body {
   padding: 6;
 }
 @media screen and (max-width: 580px) {
@@ -202,12 +228,105 @@ nav {
     margin-bottom: 0;
     padding-top: 0;
   }
-  
+
   .count-text {
     font-size: 14px;
     font-weight: bold;
   }
-  .count-card-body{
+  .count-card-body {
     padding: 6;
   }
+}
+
+/* Gallery Manage  */
+
+.galleryContainer {
+  width: 100%;
+  min-height: 90vh;
+
+  overflow-y: hidden;
+  background: var(--gradient-bg);
+}
+
+.galleryHeading {
+  width: 100%;
+  background: var(--gradient-bg);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.titleGallery {
+  color: var(--nav-text-color);
+  text-align: center;
+}
+h2.titleGallery {
+  font-size: 25px;
+}
+
+h3.titleGallery {
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.galleryBody {
+  background: var(--gradient-bg);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.galleryBody form {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 500px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.input-form{
+  margin: 10px;
+  border-radius: 10px;
+  height: 45px;
+  padding-left: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.404);
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.164);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.file-input{
+padding-top: 8px;
+}
+
+
+.input-form::placeholder {
+  color: var(--input-placeholder);
+}
+form label {
+  margin-left: 12px;
+  font-weight: 600;
+  color: var(--form-input);
+}
+
+.btn-updt {
+  width: 100px;
+  height: 40px;
+  background-color: var(--continue-btn-bg);
+  color: var(--continue-btn-color);
+  padding-left: 0px;
+  padding-top: 0px;
+}
+.input-textarea {
+  margin: 10px;
+  border-radius: 10px;
+  height: 240px;
+  padding-left: 10px;
+  padding-top: 5px;
+  border: none;
+  background: rgba(255, 255, 255, 0.404);
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.164);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }

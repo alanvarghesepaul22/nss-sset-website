@@ -104,7 +104,7 @@ include('common_includes/admin_navbar.php');
                         <div class="card-body infoCardBody">
                             <h5 class="card-title">Gallery Updation</h5>
                             <p class="card-text">Add, delete and manage gallery here.</p>
-                            <a href="" class="btn btn-sm btn-dark continue-btn">Click to continue <i class="bi bi-chevron-right"></i></a>
+                            <a href="./gallery_manage.php" class="btn btn-sm btn-dark continue-btn">Click to continue <i class="bi bi-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -147,34 +147,5 @@ include('common_includes/admin_navbar.php');
     </div>
 </div>
 
-
-<script>
-    var icon = document.getElementById("icon");
-
-    icon.onclick = function() {
-        var SetTheme = document.body;
-
-        SetTheme.classList.toggle("dark-theme");
-
-        var theme;
-
-        if (SetTheme.classList.contains("dark-theme")) {
-            console.log("Dark mode");
-            theme = "DARK";
-        } else {
-            console.log("Light mode");
-            theme = "LIGHT";
-        }
-
-        localStorage.setItem("PageTheme", JSON.stringify(theme));
-
-    };
-
-    let GetTheme = JSON.parse(localStorage.getItem("PageTheme"));
-    console.log(GetTheme);
-
-    if (GetTheme === "DARK") {
-        document.body.classList = "dark-theme";
-        icon.src = "../images/sun.png";
-    }
-</script>
+<!-- dark theme -->
+<script src="../js/dark_theme.js"></script>
