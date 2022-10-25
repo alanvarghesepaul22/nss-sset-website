@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="css/nss_navbar.css" />
 </head>
 
+<style>
+    body {
+        background: linear-gradient(to right,
+                rgba(197, 222, 231, 1) 11%,
+                rgb(182, 218, 231) 34%,
+                rgb(154, 209, 236) 100%);
+    }
+</style>
+
 <body>
     <!-- NavBar -->
     <?php
@@ -20,6 +29,7 @@
     <?php
     include('common/home_slider.php');
     ?>
+
 
     <!-- footer -->
     <?php

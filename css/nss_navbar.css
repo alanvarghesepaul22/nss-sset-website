@@ -46,7 +46,13 @@
 
 body {
   font-family: montserrat;
-  background: var(--primary-color);
+  /* background: var(--primary-color); */
+  background: linear-gradient(
+    to right,
+    rgba(197, 222, 231, 1) 11%,
+    rgb(182, 218, 231) 34%,
+    rgb(154, 209, 236) 100%
+  );
 }
 
 header {
